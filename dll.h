@@ -78,6 +78,12 @@ int insertAt(struct Node **head, int idx, void* data){
   return 0;
 }
 
+int insertAtInt(struct Node **head, int idx, int data){
+  int* p = (int*) malloc(sizeof(int));
+  *p = data;
+  insertAt(head, idx, (void*)p);
+}
+
 
 int deleteAt(struct Node **head, int idx){
   if(idx == -1 || (*head == NULL))

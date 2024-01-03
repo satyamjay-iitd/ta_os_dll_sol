@@ -25,7 +25,7 @@ int isEqualTo(struct Node *head, int* arr, int len){
     if(head == NULL)
       return 0;
 
-    if(arr[i] != head->data)
+    if(arr[i] != *((int*)head->data))
       return 0;
  
     head = head -> next;
@@ -40,7 +40,7 @@ int isEqualTo(struct Node *head, int* arr, int len){
     if(tail == NULL)
        return 0;
   
-    if(arr[i] != tail->data)
+    if(arr[i] != *((int*)tail->data))
       return 0;
  
     tail = tail -> prev;
@@ -56,24 +56,24 @@ void testInsertAt(){
 
   int arr[] = {100};
 
-  if(insertAt(&head, 0, 100) == 0 && isEqualTo(head, arr, 1))
+  if(insertAtInt(&head, 0, 100) == 0 && isEqualTo(head, arr, 1))
     printf("Test - 1. Insert at index = 0. Passed\n");
   else
     printf("Test - 1. Insert at index = 0. Failed\n");
 
-  if(insertAt(&head, 1000, 100) == -1 && isEqualTo(head, arr, 1))
+  if(insertAtInt(&head, 1000, 100) == -1 && isEqualTo(head, arr, 1))
     printf("Test - 2. Insert at index > len. Passed\n");
   else
     printf("Test - 2. Insert at index > len. Failed\n");
 
   int arr2[] = {100, 200};
-  if(insertAt(&head, 1, 200) == 0 && isEqualTo(head, arr2, 2))
+  if(insertAtInt(&head, 1, 200) == 0 && isEqualTo(head, arr2, 2))
     printf("Test - 3. Insert at index = len. Passed\n");
   else
     printf("Test - 3. Insert at index = len. Failed\n");
 
   int arr3[] = {100, 150, 200};
-  if(insertAt(&head, 1, 150) == 0 && isEqualTo(head, arr3, 3))
+  if(insertAtInt(&head, 1, 150) == 0 && isEqualTo(head, arr3, 3))
     printf("Test - 4. Insert at 0<index<len. Passed\n");
   else
     printf("Test - 4. Insert at 0<index<len. Failed\n");
@@ -97,10 +97,10 @@ void testDeleteAt(){
   else
     printf("Test - 1.1. Delete from Empty - 2. Failed\n");
 
-  insertAt(&head, 0, 400);
-  insertAt(&head, 0, 300);
-  insertAt(&head, 0, 200);
-  insertAt(&head, 0, 100);
+  insertAtInt(&head, 0, 400);
+  insertAtInt(&head, 0, 300);
+  insertAtInt(&head, 0, 200);
+  insertAtInt(&head, 0, 100);
 
   int arr[] = {200, 300, 400};
   if(deleteAt(&head, 0) == 0 && isEqualTo(head, arr, 3))
@@ -139,7 +139,7 @@ int _testAt(struct Node* head, int* arr, int len){
     return 0;
 
   for(int i=0; i<len; i++){
-    if(at(head, i)->data != arr[i])
+    if(*((int*)at(head, i)->data) != arr[i])
       return 0;
   }
 
@@ -162,7 +162,7 @@ void testAt(){
   int arr[] = {100, 200, 300, 400};
   int failed = 0;
   for(int i=0; i<4; i++){
-    insertAt(&head, i, (i+1)*100);
+    insertAtInt(&head, i, (i+1)*100);
     if(_testAt(head, arr, i+1) != 1){
       failed = 1; 
       break;
