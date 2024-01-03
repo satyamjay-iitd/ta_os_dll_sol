@@ -2,6 +2,44 @@
 
 #include "dll.h"
 
+
+void clear(struct Node **head){
+  while(deleteAt(head, 0) == 0);
+}
+
+// Compares dll to an array.
+// Assuming every element in the list is an int
+int isEqualTo(struct Node *head, int* arr, int len){
+  struct Node* tail = head;
+ 
+  for(int i=0; i<len; i++){
+    if(head == NULL)
+      return 0;
+
+    if(arr[i] != head->data)
+      return 0;
+  
+    tail = head->prev;
+    head = head -> next;
+  }
+
+  if(head != NULL)
+    return 0;
+
+  // for(int i=len-1; i>=0; i--){
+  //   if(tail == NULL)
+  //     return 0;
+  //
+  //   if(arr[i] != tail->data)
+  //     return 0;
+  //
+  //   tail = tail -> prev;
+  // }
+  //
+  // return tail == NULL;
+}
+
+
 void testInsertAt(){
   printf("\n****************** TESTING INSERT ***************************\n");
   struct Node* head = NULL;
