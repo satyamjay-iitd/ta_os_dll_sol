@@ -1,3 +1,4 @@
+#include <string.h>
 #include "dll.h"
 
 void testInsertAt(){
@@ -91,7 +92,6 @@ int _testAt(struct Node* head, int* arr, int len){
   for(int i=0; i<len; i++){
     if(at(head, i)->data != arr[i])
       return 0;
-
   }
 
   if(at(head, len) != NULL)
@@ -140,10 +140,45 @@ void testAt(){
   clear(&head);
 }
 
+void testArbitraryDataType(){
+  printf("\n****************** TESTING ARBITRARY DATATYPE ***************************\n");
+
+  struct Node* head = NULL;
+
+  int* I = (int*)malloc(sizeof(int));
+  *I = 100;
+  double* D = (double*)malloc(sizeof(double));
+  *D = 100;
+  char* S = strdup("300");
+  
+  insertAt(&head, 0, I);
+  insertAt(&head, 1, D);
+  insertAt(&head, 2, S);
+
+  int testFail = 0;
+  if(*(int*)(at(head, 0)->data) != *I)
+    testFail = 1;
+  if(*(double*)(at(head, 1)->data) != *D)
+    testFail = 1;
+  if((char*)(at(head, 2)->data) != S)
+    testFail = 1;
+
+  if(testFail)
+    printf("Test - 1. Failed\n");
+  else
+    printf("Test - 1. Passed\n");
+
+  free(I);
+  free(D);
+  free(S);
+  clear(&head);
+}
+
 void runTestCases(){
   testInsertAt();
   testDeleteAt();
   testAt();
+  testArbitraryDataType();
 }
 
 

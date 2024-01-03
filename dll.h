@@ -3,7 +3,7 @@
 
 struct Node
 {
-  int data;
+  void *data;
   struct Node *next;
   struct Node *prev;
 };
@@ -36,7 +36,7 @@ struct Node* at(struct Node *head, int idx){
 //  99 -> 100 -> 150 -> 200 -> 201
 //      insertAt(-1, _)
 //  99 -> 100 -> 150 -> 200 -> 201
-int insertAt(struct Node **head, int idx, int data){
+int insertAt(struct Node **head, int idx, void* data){
   if(idx == -1)
     return -1;
 
@@ -118,40 +118,14 @@ void clear(struct Node **head){
 }
 
 
-void display (struct Node *node)
-{
-  struct Node *end;
-  printf ("\nIn Forward Direction\n");
-  while (node != NULL)
-    {
-      printf (" %d ", node->data);
-      end = node;
-      node = node->next;
-    }
-
-  printf ("\nIn Backward direction \n");
-  while (end != NULL)
-    {
-      printf (" %d ", end->data);
-      end = end->prev;
-    }
-}
-
-void displayAt(struct Node* head, int idx){
-  struct Node* n = at(head, idx);
-  if(n == NULL)
-    printf("NULL\n");
-  else
-    printf("%d\n", at(head, idx)->data);
-}
-
 // Compares dll to an array.
+// Assuming every element in the list is an int
 int isEqualTo(struct Node *head, int* arr, int len){
   for(int i=0; i<len; i++){
     if(head == NULL)
       return 0;
 
-    if(arr[i] != head->data)
+    if(arr[i] != (int)head->data)
       return 0;
 
     head = head -> next;
