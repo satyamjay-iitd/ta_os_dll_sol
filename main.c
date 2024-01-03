@@ -27,7 +27,7 @@ int isEqualTo(struct Node *head, int* arr, int len){
 
     if(arr[i] != head->data)
       return 0;
-    
+ 
     head = head -> next;
   }
 
@@ -43,10 +43,10 @@ int isEqualTo(struct Node *head, int* arr, int len){
     if(arr[i] != tail->data)
       return 0;
  
-   tail = tail -> prev;
+    tail = tail -> prev;
   }
  
- return tail == NULL;
+  return tail == NULL;
 }
 
 
